@@ -1,7 +1,7 @@
 <template>
   <div class="welcome-container">
     <div class="content-wrapper">
-      <h1>Olá, meu amor!</h1>
+      <h1>Oi, minha princesa!</h1>
       <p>Preparei uma surpresa para você.</p>
       <button @click="emitProceed">Clique aqui</button>
     </div>
@@ -33,13 +33,13 @@ export default defineComponent({
   align-items: center; /* Centraliza verticalmente */
   min-height: 100vh; /* Garante que o container ocupe a altura total da viewport */
   width: 100%;
-  background: url('/background.jpg') no-repeat center center fixed; /* Exemplo de background com imagem */
-  /* Ou use uma cor sólida: background-color: #ffc0cb; */
+  /* Use o alias @/ para referenciar a imagem em src/assets */
+  background: url('/images/background.jpg') no-repeat center center fixed;
   background-size: cover; /* Garante que a imagem cubra toda a área */
   color: white; /* Cor do texto para contrastar com o background */
   text-align: center; /* Centraliza o texto */
-  position: relative; /* Necessário para sobrepor o conteúdo se a imagem for muito escura */
-  z-index: 1;
+  position: relative; /* Necessário para o pseudo-elemento e z-index */
+  z-index: 1; /* Garante que o container principal esteja acima do fundo */
 }
 
 /* Adiciona uma sobreposição escura para melhorar a legibilidade do texto, se necessário */
@@ -54,22 +54,27 @@ export default defineComponent({
   z-index: -1; /* Fica atrás do conteúdo */
 }
 
-
 .content-wrapper {
     /* Se precisar de algum padding ou margin extra para o conteúdo */
     padding: 20px;
+    position: relative; /* Garante que o z-index funcione */
+    z-index: 2; /* Coloca o conteúdo acima do overlay */
 }
 
 h1 {
+  font-family: 'Sacramento', cursive;
+  color: #ffcdac;
   font-size: 2.5em; /* Tamanho do título */
   margin-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para destacar o texto */
 }
 
 p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para destacar o texto */
+  font-family: 'Sacramento', cursive;
+  color: #ffcdac;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para destacar o texto */
 }
 
 button {
@@ -78,13 +83,13 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #ff69b4; /* Cor de botão rosa */
-  color: white;
+  background-color: #ffcdac; /* Cor de botão rosa */
+  color: #660005;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #ff85c1; /* Cor rosa mais clara ao passar o mouse */
+  background-color: #ffcdac; /* Cor rosa mais clara ao passar o mouse */
 }
 
 /* Estilos para responsividade em telas menores (opcional, mas recomendado) */
@@ -92,11 +97,9 @@ button:hover {
   h1 {
     font-size: 1.8em;
   }
-
   p {
     font-size: 1em;
   }
-
   button {
     padding: 10px 20px;
     font-size: 1em;
