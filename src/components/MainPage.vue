@@ -1,8 +1,7 @@
 <template>
   <div class="main-page-container">
-    <!-- A classe 'blurred-content' NÃO está aqui -->
     <div class="content-area">
-      <!-- Player Spotify -->
+      <!-- Spotify -->
       <section class="spotify-section">
         <div class="spotify-frame-wrapper">
           <iframe
@@ -46,10 +45,14 @@
         <h1>Uma Mensagem para Você</h1>
         <div class="text-content">
           <p>
-            O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias
-            desde o ano de 1500, quando uma misturou os caracteres de um texto para
-            criar um espécime de livro. Este texto não só sobreviveu 5 séculos, mas
-            também o salto para a tipografia eletrônica, mantendo-se essencialmente inalterada...
+            O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. 
+            O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde 
+            o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime 
+            de livro. Este texto não só sobreviveu 5 séculos, mas também o salto para a tipografia 
+            electrónica, mantendo-se essencialmente inalterada. Foi popularizada nos anos 60 com 
+            a disponibilização das folhas de Letraset, que continham passagens com Lorem Ipsum, e 
+            mais recentemente com os programas de publicação como o Aldus PageMaker que incluem 
+            versões do Lorem Ipsum.
           </p>
         </div>
       </section>
@@ -92,7 +95,6 @@ export default defineComponent({
     let timerInterval: number | undefined = undefined;
 
     const carouselImages = ref([
-      // Removido o campo 'date'
       { src: '/photos/foto01.jpg', alt: 'Nossa Foto 1', location: 'Lovina 2025 - JP' },
       { src: '/photos/foto02.jpg', alt: 'Nossa Foto 2', location: 'Cicchetti - Pipa' },
       { src: '/photos/foto04.jpg', alt: 'Nossa Foto 4', location: 'Verão 2025 - Pirangi' },
@@ -101,7 +103,6 @@ export default defineComponent({
       { src: '/photos/foto07.jpg', alt: 'Nossa Foto 7', location: 'Dom Vinicius - Natal' },
       { src: '/photos/foto08.jpg', alt: 'Nossa Foto 8', location: 'Carnaval 2024 - Pirangi' },
       { src: '/photos/foto09.jpg', alt: 'Nossa Foto 9', location: 'White 2024 - Pirangi' },
-      // Continue preenchendo o campo 'location' para as outras fotos
     ]);
 
     const enlargedImageIndex = ref<number | null>(null);
