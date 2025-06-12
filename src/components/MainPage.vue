@@ -24,16 +24,16 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v3z"/></svg>
               </button>
               <button @click="skipBackward" class="control-button skip-backward-button" title="Retroceder 10s">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
               </button>
               <button @click="togglePlayPause" class="control-button play-pause-button" :title="isPlaying ? 'Pause' : 'Play'">
                 <svg v-if="!isPlaying" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M8 5v14l11-7z"/></svg>
                 <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
               </button>
               <button @click="skipForward" class="control-button skip-forward-button" title="Avançar 10s">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 19V15l-5 5 5 5v-4c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6H4c0-4.42 3.58-8 8-8s8 3.58 8 8-3.58 8-8 8z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 19V15l-5 5 5 5v-4c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6H4c0-4.42 3.58-8 8-8s8 3.58 8 8-3.58 8-8 8z"/></svg>
               </button>
-               <button @click="toggleShuffle" :class="{ active: isShuffling }" class="control-button shuffle-button" title="Aleatório">
+                <button @click="toggleShuffle" :class="{ active: isShuffling }" class="control-button shuffle-button" title="Aleatório">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 18.59 7.46 20 9V4h-5.5zm.5 10H12v1.59l5-5V10h3v6z"/></svg>
               </button>
             </div>
@@ -94,6 +94,7 @@
 </template>
 
 <script lang="ts">
+// (O SCRIPT CONTINUA O MESMO)
 import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
 import { intervalToDuration } from 'date-fns';
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
@@ -121,35 +122,26 @@ export default defineComponent({
     const isRepeating = ref(false);
     const isShuffling = ref(false);
     
-    // --- LÓGICA DO PLAYER REFEITA ---
-
-    // O botão agora apenas alterna o estado. A lógica de play/pause foi centralizada no 'watch'.
     const togglePlayPause = () => {
       isPlaying.value = !isPlaying.value;
     };
 
-    // 'watch' atua como o ÚNICO controlador do áudio.
-    // Ele observa a variável 'isPlaying' e comanda o player.
     watch(isPlaying, (newIsPlayingValue) => {
       if (!audioPlayer.value) return;
 
       if (newIsPlayingValue) {
-        // Se o estado mudou para "tocando", executa o play.
         const playPromise = audioPlayer.value.play();
         if (playPromise !== undefined) {
           playPromise.catch(error => {
             console.error("Erro ao tentar tocar a música (autoplay pode estar bloqueado):", error);
-            // Se o play falhar (ex: bloqueio do navegador), reverte o estado para 'false'.
             isPlaying.value = false;
           });
         }
       } else {
-        // Se o estado mudou para "pausado", executa o pause.
         audioPlayer.value.pause();
       }
     });
 
-    // Sincroniza o estado 'isPlaying' com os eventos nativos do player
     const handlePlay = () => {
       if (!isPlaying.value) isPlaying.value = true;
     };
@@ -225,14 +217,19 @@ export default defineComponent({
     };
 
     const carouselImages = ref([
-      { src: '/photos/foto01.jpg', alt: 'Nossa Foto 1', location: 'Lovina 2025 - JP' },
-      { src: '/photos/foto02.jpg', alt: 'Nossa Foto 2', location: 'Cicchetti - Pipa' },
-      { src: '/photos/foto04.jpg', alt: 'Nossa Foto 4', location: 'Verão 2025 - Pirangi' },
-      { src: '/photos/foto05.jpg', alt: 'Nossa Foto 5', location: 'Réveillon 2025 - Pirangi' },
-      { src: '/photos/foto06.jpg', alt: 'Nossa Foto 6', location: 'Show de J&M - Bananeiras' },
-      { src: '/photos/foto07.jpg', alt: 'Nossa Foto 7', location: 'Dom Vinicius - Natal' },
-      { src: '/photos/foto08.jpg', alt: 'Nossa Foto 8', location: 'Carnaval 2024 - Pirangi' },
+      { src: '/photos/foto11.jpg', alt: 'Nossa Foto 11', location: 'Nosso Primeiro Réveillon 2024' },
+      { src: '/photos/foto12.jpg', alt: 'Nossa Foto 12', location: 'Redação 2024 - Pirangi' },
+      { src: '/photos/foto13.jpg', alt: 'Nossa Foto 13', location: 'Lamartine 2024' },
       { src: '/photos/foto09.jpg', alt: 'Nossa Foto 9', location: 'White 2024 - Pirangi' },
+      { src: '/photos/foto15.jpg', alt: 'Nossa Foto 15', location: 'Formatura de Lennon - 2024' },
+      { src: '/photos/foto08.jpg', alt: 'Nossa Foto 8', location: 'Carnaval 2024 - Pirangi' },
+      { src: '/photos/foto07.jpg', alt: 'Nossa Foto 7', location: 'Dom Vinicius - Natal' },
+      { src: '/photos/foto06.jpg', alt: 'Nossa Foto 6', location: 'Show de J&M - Bananeiras' },
+      { src: '/photos/foto14.jpg', alt: 'Nossa Foto 14', location: 'Show de J&M - Bananeiras' },
+      { src: '/photos/foto05.jpg', alt: 'Nossa Foto 5', location: 'Réveillon 2025' },
+      { src: '/photos/foto04.jpg', alt: 'Nossa Foto 4', location: 'Verão 2025' },
+      { src: '/photos/foto02.jpg', alt: 'Nossa Foto 2', location: 'Cicchetti - Pipa' },
+      { src: '/photos/foto01.jpg', alt: 'Nossa Foto 1', location: 'Lovina 2025 - JP' },
     ]);
 
     const enlargedImageIndex = ref<number | null>(null);
@@ -262,7 +259,6 @@ export default defineComponent({
     });
 
     const updateTime = () => {
-      // (código do timer continua o mesmo)
       const now = new Date(); 
       const duration = intervalToDuration({ start: startDate, end: now });
       const parts = [];
@@ -294,7 +290,6 @@ export default defineComponent({
         audioPlayer.value.addEventListener('timeupdate', handleTimeUpdate);
         audioPlayer.value.addEventListener('loadedmetadata', handleLoadedMetadata);
 
-        // Apenas define o estado inicial para tocar. O 'watch' fará o resto.
         isPlaying.value = true;
       }
     });
@@ -339,10 +334,26 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Adicionando a importação da nova fonte no topo */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+/* --- Fontes Carregadas Localmente --- */
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('/fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
 
-/* Estilos existentes */
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Regular.ttf') format('truetype');
+  font-weight: 500; /* Medium/Regular */
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Bold.ttf') format('truetype');
+  font-weight: 700; /* Bold */
+}
+
+/* O resto do seu CSS continua exatamente o mesmo */
 .main-page-container {
   display: flex;
   justify-content: center;
@@ -363,21 +374,17 @@ export default defineComponent({
   flex-direction: column;
   gap: 30px;
 }
-
-/* --- ALTERAÇÃO DA FONTE --- */
 h1 {
-  font-family: 'Great Vibes', cursive; /* Nova fonte romântica */
+  font-family: 'Great Vibes', cursive;
   text-align: center;
   color: #991938;
   margin-bottom: 1em;
-  font-size: 3.2em; /* Ajuste no tamanho para a nova fonte */
+  font-size: 3.2em;
   text-shadow: 2px 2px 8px #ffe3d1;
 }
-
 section {
   margin-bottom: 20px;
 }
-/* ----------- AUDIO PLAYER ----------- */
 .audio-player-section {
   text-align: center;
 }
@@ -459,7 +466,6 @@ section {
     width: 36px;
     height: 36px;
 }
-/* ----------- CARROSSEL ----------- */
 .carousel-section {
   margin-bottom: 0;
 }
@@ -522,7 +528,6 @@ section {
 .carousel__icon {
   font-size: 1.65em !important;
 }
-/* ----------- TIMER ----------- */
 .timer-display {
   text-align: center;
   padding: 19px 0;
@@ -544,7 +549,6 @@ section {
   letter-spacing: .8px;
   font-family: "Quicksand", 'Segoe UI', Arial, sans-serif;
 }
-/* ----------- TEXTO ----------- */
 .text-content p {
   font-family: 'Quicksand', sans-serif;
   line-height: 1.7;
@@ -557,7 +561,6 @@ section {
   box-shadow: 0 1.5px 8px #ffcdac23;
   margin: 1em;
 }
-/* ----------- OVERLAY DA IMAGEM AMPLIADA ----------- */
 .enlarged-image-overlay {
   position: fixed;
   top: 0;
@@ -571,7 +574,6 @@ section {
   align-items: center;
   cursor: pointer;
 }
-/* ----------- ESTILO POLAROID CONTAINER ----------- */
 .polaroid-container {
   background-color: white;
   padding: 15px 15px 40px 15px;
@@ -602,7 +604,6 @@ section {
   margin: 0;
   padding: 0;
 }
-/* ----------- TRANSIÇÃO DE ZOOM E FADE ----------- */
 .zoom-fade-enter-active,
 .zoom-fade-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -617,7 +618,6 @@ section {
   opacity: 1;
   transform: scale(1);
 }
-/* ========== RESPONSIVIDADE =========== */
 @media (max-width: 600px) {
   .main-page-container,
   .content-area {
@@ -633,7 +633,7 @@ section {
     background: rgba(255, 255, 255, 0.97) !important;
   }
   h1 {
-    font-size: 2.8em !important; /* Ajuste responsivo */
+    font-size: 2.8em !important;
     margin-top: 0.4em !important;
     margin-bottom: 0.5em !important;
     letter-spacing: 1.1px !important;
@@ -688,10 +688,9 @@ section {
     font-size: 0.8em;
     margin-top: 8px;
   }
-  /* Ajustes para o player de áudio em mobile */
   .audio-player-container {
     padding: 15px;
-    max-width: 85vw; /* Aumentei um pouco para melhor aproveitamento */
+    max-width: 85vw;
     margin: 0 auto;
   }
   .playback-buttons {
@@ -713,7 +712,6 @@ section {
       width: 90%;
   }
 }
-/* Tablets (entre mobile e desktop) */
 @media (max-width: 950px) and (min-width:601px) {
   .polaroid-container {
     padding: 12px 12px 35px 12px;
@@ -725,7 +723,6 @@ section {
     font-size: 0.85em;
     margin-top: 9px;
   }
-    /* Ajustes para o player de áudio em tablet */
   .audio-player-container {
     max-width: 600px;
   }

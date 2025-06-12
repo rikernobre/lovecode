@@ -25,6 +25,7 @@
 </template>
 
 <script lang="ts">
+// (O SCRIPT CONTINUA O MESMO)
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
@@ -52,9 +53,26 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+/* --- Fontes Carregadas Localmente --- */
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('/fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
 
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Regular.ttf') format('truetype');
+  font-weight: 500; /* Medium/Regular */
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Bold.ttf') format('truetype');
+  font-weight: 700; /* Bold */
+}
+
+/* O resto do seu CSS continua exatamente o mesmo */
 .welcome-container {
   display: flex;
   justify-content: center;
@@ -94,12 +112,12 @@ p {
   position: relative;
   width: 280px;
   height: 190px;
-  transition: opacity 0.6s 0.9s, transform 0.6s 0.9s; /* Adicionado transform para afastar a carta */
+  transition: opacity 0.6s 0.9s, transform 0.6s 0.9s;
 }
 
 .envelope-wrapper.opening {
   opacity: 0;
-  transform: translateY(-50px) scale(0.9); /* Efeito de subir e diminuir ao sumir */
+  transform: translateY(-50px) scale(0.9);
 }
 
 .envelope-body {
@@ -119,7 +137,6 @@ p {
   top: 0;
   width: 100%;
   height: 55%;
-  /* Cor da aba com transparência para ver o botão */
   background-color: rgba(255, 205, 172, 0.85); 
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   border-top-left-radius: 6px;
@@ -128,7 +145,6 @@ p {
   transition: transform 0.6s ease-in-out;
   z-index: 3;
   transform-style: preserve-3d;
-  /* Permite que o clique "atravesse" a aba e chegue ao botão */
   pointer-events: none; 
 }
 
@@ -146,7 +162,6 @@ p {
   border-radius: 6px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   transition: transform 0.7s 0.2s ease-out;
-  /* Adicionado para centralizar o botão */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,7 +197,6 @@ button, .pulse-btn {
   transition: all 0.3s ease;
   outline: none;
   margin-top: 80px;
-  /* Garante que o botão seja clicável */
   pointer-events: auto;
 }
 
