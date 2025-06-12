@@ -67,18 +67,33 @@
         <h1>Uma Mensagem para Você</h1>
         <div class="text-content">
           <p>
-            O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão.
-            O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde
-            o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime
-            de livro. Este texto não só sobreviveu 5 séculos, mas também o salto para a tipografia
-            electrónica, mantendo-se essencialmente inalterada. Foi popularizada nos anos 60 com
-            a disponibilização das folhas de Letraset, que continham passagens com Lorem Ipsum, e
-            mais recentemente com os programas de publicação como o Aldus PageMaker que incluem
-            versões do Lorem Ipsum.
+            Falar de você nunca foi um problema pra mim. O que me pega, às vezes, é encontrar
+            as palavras certas pra expressar tudo o que eu sinto. Você é, sem dúvidas, a pessoa 
+            mais fofa, mais doce, mais linda, mais forte… mas também, a mais estressadinha que eu 
+            conheço kkkkk. E é justamente esse jeitinho único que me faz te admirar cada vez mais.
+            Mesmo com os obstáculos e os pequenos conflitos do dia a dia, a gente continua firme. 
+            E sabe por quê? Porque são nesses momentos que a gente prova que vale a pena. Porque o 
+            que temos vai além das dificuldades. E é isso que nos mantém de pé, lado a lado, 
+            aprendendo e crescendo juntos. Seu olhar tem o poder de acalmar qualquer tempestade 
+            em mim e, ao mesmo tempo, arrancar os sorrisos mais sinceros que eu já dei. 
+            Tem coisas que não dá pra explicar, só sentir… e você é uma delas. Eu te amo!
           </p>
+
+          <div class="poem">
+            <p>
+              "No tumulto do mundo, teu<br>
+              abraço é o oásis onde encontro<br>
+              serenidade. Contigo, cada<br>
+              respiração é tranquila, cada<br>
+              batida do coração é calma. És a<br>
+              harmonia que equilibra meu<br>
+              ser, a melodia suave que embala<br>
+              meus sonhos."
+            </p>
+          </div>
         </div>
       </section>
-    </div>
+      </div>
 
     <Transition name="zoom-fade">
       <div v-if="enlargedImageIndex !== null" class="enlarged-image-overlay" @click.self="closeEnlargedImage">
@@ -94,7 +109,6 @@
 </template>
 
 <script lang="ts">
-// (O SCRIPT CONTINUA O MESMO)
 import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
 import { intervalToDuration } from 'date-fns';
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
@@ -334,7 +348,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* --- Fontes Carregadas Localmente --- */
+/* --- Fontes --- */
 @font-face {
   font-family: 'Great Vibes';
   src: url('/fonts/GreatVibes-Regular.ttf') format('truetype');
@@ -353,7 +367,7 @@ export default defineComponent({
   font-weight: 700; /* Bold */
 }
 
-/* O resto do seu CSS continua exatamente o mesmo */
+
 .main-page-container {
   display: flex;
   justify-content: center;
@@ -561,6 +575,21 @@ section {
   box-shadow: 0 1.5px 8px #ffcdac23;
   margin: 1em;
 }
+
+/* --- ESTILO ADICIONADO PARA O POEMA --- */
+.poem {
+  margin-top: 1em;
+}
+.poem p {
+  background: none;
+  box-shadow: none;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.8;
+  padding-top: 0;
+}
+/* --- FIM DO ESTILO ADICIONADO --- */
+
 .enlarged-image-overlay {
   position: fixed;
   top: 0;

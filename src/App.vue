@@ -2,7 +2,6 @@
   <div id="app">
     <WelcomePage v-if="showWelcomePage" @proceed="handleProceed" />
 
-    <!-- Renderiza o componente MainPage se showWelcomePage for false -->
     <MainPage v-else />
   </div>
 </template>
@@ -10,7 +9,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import WelcomePage from './components/WelcomePage.vue';
-import MainPage from './components/MainPage.vue'; // Importe o componente MainPage
+import MainPage from './components/MainPage.vue'; 
 
 export default defineComponent({
   name: 'App',
@@ -34,7 +33,7 @@ export default defineComponent({
 </script>
 
 <style>
-/* Mantenha os estilos globais do App.vue */
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -46,6 +45,4 @@ export default defineComponent({
   overflow-x: hidden;
 }
 
-/* Remova os estilos do placeholder da página principal que estavam aqui, pois agora usamos o MainPage */
-/* .main-content-placeholder { ... } */
 </style>

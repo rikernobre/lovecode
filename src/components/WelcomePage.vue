@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-// (O SCRIPT CONTINUA O MESMO)
+
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
@@ -53,7 +53,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* --- Fontes Carregadas Localmente --- */
+/* --- Fontes --- */
 @font-face {
   font-family: 'Great Vibes';
   src: url('/fonts/GreatVibes-Regular.ttf') format('truetype');
@@ -72,7 +72,7 @@ export default defineComponent({
   font-weight: 700; /* Bold */
 }
 
-/* O resto do seu CSS continua exatamente o mesmo */
+
 .welcome-container {
   display: flex;
   justify-content: center;
